@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 20px 50px;
+      }
+
+      .image {
+        background-image: url("./images/img.jpg");
+        background-repeat: no-repeat;
+        background-color: red;
+        width: 100%;
+        height: 340px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        position: relative;
+      }
+
+      .content {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      .something-random {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: white;
+        padding: 8px 20px;
+        border-radius: 8px;
+      }
+
+      .arrow-right-container {
+        position:absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: blue;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: flex;
+        opacity: 0;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .arrow-right-container:hover {
+        opacity: 100%;
+      }
+
+      @media screen and (max-width: 425px) {
+        .container {
+            grid-template-columns: 1fr;
+            margin: 10px;
+        }
+      }
+
+      @media screen and (min-width: 426px) and (max-width: 768px) {
+        .container {
+            grid-template-columns: repeat(2, 1fr);
+            margin: 10px;
+        }
+      }
+
+    </style>
+
+    <div class="container">
+      <div class="card">
+        <div class="image">
+          <div class="something-random">Something random</div>
+          <div class="arrow-right-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              color="white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right-icon lucide-arrow-right"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+        <div class="content">
+          Yammm uses TeamViewer AI to gain 25% efficiency in IT support.
+        </div>
+      </div>
+      <div class="card">
+        <div class="image">
+          <div class="something-random">Something random</div>
+          <div class="arrow-right-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              color="white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right-icon lucide-arrow-right"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+        <div class="content">
+          Berner Group maintains its IT with TeamViewer Assist AR and Microsoft
+          HoloLens.
+        </div>
+      </div>
+      <div class="card">
+        <div class="image">
+          <div class="something-random">Something random</div>
+          <div class="arrow-right-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              color="white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right-icon lucide-arrow-right"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+        <div class="content">
+          United Robotics Group relies on TeamViewer for cutting-edge aftersales
+          support.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
