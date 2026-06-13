@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="calculator.css" />
+  </head>
+  <body>
+    <main>
+      <div class="display"></div>
+      <div class="button-container">
+        <button onclick="clearScreen()">CE</button>
+        <button onclick="buttonClick('** 0.5')">SQRT</button>
+        <button onclick="buttonClick('* 0.01')">%</button>
+        <button onclick="buttonClick('/')">/</button>
+        <button onclick="buttonClick(7)">7</button>
+        <button onclick="buttonClick(8)">8</button>
+        <button onclick="buttonClick(9)">9</button>
+        <button onclick="buttonClick('*')">X</button>
+        <button onclick="buttonClick(4)">4</button>
+        <button onclick="buttonClick(5)">5</button>
+        <button onclick="buttonClick(6)">6</button>
+        <button onclick="buttonClick('-')">-</button>
+        <button name="first" onclick="buttonClick(1)">1</button>
+        <button onclick="buttonClick(2)">2</button>
+        <button onclick="buttonClick(3)">3</button>
+        <button onclick="buttonClick('+')">+</button>
+        <button onclick="buttonClick(0)">0</button>
+        <button onclick="dot()">.</button>
+        <button style="grid-column: span 2" onclick="equalTo()">=</button>
+      </div>
+    </main>
+    <script>
+
+
+
+      const display = document.querySelector(".display");
+
+      const mathSigns = ["+", "-", "/", "*", "%"];
+
+      function clearScreen() {
+        display.innerText = "";
+      }
+
+      function welcomeText() {
+        display.innerText = "Good afternoon, Victor";
+        setTimeout(clearScreen, 5000);
+      }      
+
+      welcomeText();
+
+
+      function buttonClick(buttonValue) {
+        if(display.innerText.length >= 14) {
+            alert("Max reached");
+            return;
+        }
+
+        if(typeof buttonValue == "string" &&
+            mathSigns.includes(display.innerText[display.innerText.length - 1])) {
+              alert("Double signs are not allowed");
+          return;
+        }
+
+        display.innerText += buttonValue;
+        
+      }
+
+      
+
+      function dot() {
+        if (display.innerText.includes(".")) return;
+
+        display.innerText += ".";
+      }
+
+      function equalTo() {
+        try {
+
+          if(!display.innerText) return;
+
+          if (display.innerText === "Error") {
+            display.innerText = "";
+            return;
+          }
+
+          display.innerText = eval(display.innerText);
+          
+        } catch (error) {
+          display.innerText = "Error";
+          console.log(error);
+        }
+      }
+
+      console.log(document);
+
+      const posts = [
+          {
+            id: 1,
+            username: "Le Hairs",
+            post: "Welcome to Le Hairs",
+            likes: 500,
+            comments: 120
+          },
+          {
+            id: 2,
+            username: "Rex",
+            post: "Welcome to Rex graphics",
+            likes: 500,
+            comments: 120
+          },
+        ];
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body {
+            margin: 0;
+        }
+        .container {
+            height: 100vh;
+            display: flex;
+        }
+        .green {
+            background-color: green;
+            height: 100%;
+            width: 25%;
+        }
+
+        .main-area {
+            background-color: red;
+            /* height: 100%; */
+            width: 75%;
+        }
+
+        .main-area-header {
+            background-color: blue;
+            height: 60px;
+            width: 100%;
+        }
+
+        .main-area-content {
+            background-color: yellow;
+            height: calc(100% - 80px);
+            width: 100%;
+        }
+
+        footer {
+            height: 20px;
+        }
+
+    </style>
+
+    <div class="container">
+        <div class="green">sidebar</div>
+        <div class="main-area">
+            <div class="main-area-header">Header</div>
+            <div class="main-area-content">
+                Body
+            </div>
+            <footer>Footer</footer>
+        </div>
+    </div>
+</body>
+</html>

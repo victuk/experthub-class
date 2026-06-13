@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      main {
+        width: 400px;
+      }
+    </style>
+
+    <main>
+      <div style="text-align: center">
+        <input id="todo-input" placeholder="Type a todo..." />
+        <button id="todo-button">Add Todo</button>
+      </div>
+      <div
+        id="todo-list"
+        style="
+          border: 1px solid black;
+          min-height: 400px;
+          margin-top: 20px;
+          border-radius: 8px;
+        "
+      ></div>
+    </main>
+
+    <script>
+      const todoInput = document.getElementById("todo-input");
+      const todoList = document.getElementById("todo-list");
+      const todoButton = document.getElementById("todo-button");
+
+      let id = 1;
+
+      const todoTasks = [];
+
+      function checkIfTodoIsEmpty() {
+        if (todoTasks.length == 0) {
+          todoList.innerHTML =
+            "<div style='font-weight: bold; text-align: center; color: green; margin-top: 40px;'>No todo added<div>";
+        } else {
+          todoList.innerHTML = "";
+        }
+      }
+
+      checkIfTodoIsEmpty();
+
+      function addTodo() {
+        const todoInputValue = todoInput.value.trim();
+
+        if (todoInputValue.length == 0) {
+          alert("Empty todo not allowed");
+          return;
+        }
+
+        todoTasks.unshift({
+          id: id,
+          todo: todoInputValue,
+          completed: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+
+        id++;
+
+        checkIfTodoIsEmpty();
+
+        updateTodoList();
+      }
+
+      todoButton.addEventListener("click", addTodo);
+
+      function updateTodoList() {
+        todoList.innerHTML == "";
+
+        for (let i = 0; i < todoTasks.length; i++) {
+          todoList.innerHTML += `
+                    <div style="margin: 20px 0;">
+                        <div>Task title: ${todoTasks[i].todo}</div>
+                        <div>Is it completed?: ${todoTasks[i].completed == true ? "Yes" : "No"}</div>
+                        <div>Created at: ${todoTasks[i].createdAt}</div>
+                    </div>
+                `;
+        }
+      }
+    </script>
+  </body>
+</html>
