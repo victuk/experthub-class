@@ -97,8 +97,8 @@
         <div>
             <div>Initial Unit</div>
             <select id="initial-unit">
-                <option value="c">Celsius</option>
-                <option value="f">Fahrenheit</option>
+                <option value="c">&deg; Celsius</option>
+                <option value="f">&deg; Fahrenheit</option>
                 <option value="k">Kelvin</option>
             </select>
         </div>
@@ -109,12 +109,12 @@
         <div>
             <div>Unit to convert to</div>
             <select id="subsequent-unit">
-                <option value="c">Celsius</option>
-                <option value="f">Fahrenheit</option>
+                <option value="c">&deg; Celsius</option>
+                <option value="f">&deg; Fahrenheit</option>
                 <option value="k">Kelvin</option>
             </select>
         </div>
-        <div id="result">Display Result</div>
+        <div id="result">Display result</div>
         <div>
             <button class="calculate-button">Calculate</button>
         </div>
@@ -125,7 +125,7 @@
             <div style="text-align: right; padding: 10px;">
                 <button id="close">Close</button>
             </div>
-            <div id="message">Message</div>
+            <div id="message"></div>
         </div>
     </div>
 
@@ -140,11 +140,15 @@
         const message = document.querySelector("#message");
         const closeButton = document.querySelector("#close");
 
-        closeButton.addEventListener("click", function () {
+        function closeIt() {
             modal.style.display = "none";
-        });
+        }
+
+        closeButton.addEventListener("click", closeIt);
 
         function calculateFunction() {
+
+            message.style.color = "red";
 
             if(initialUnit.value == subsequentUnit.value) {
                 message.innerText = "The initial and subsequent units should not be the same";
@@ -160,13 +164,18 @@
 
             if(initialUnit.value === "c" && subsequentUnit.value === "f") {
                 const fahrenheitValue = (Number(tempValue.value) * 1.8) + 32;
-                display.innerText = fahrenheitValue;
+                display.innerHTML = fahrenheitValue + "&deg;F";
+                return;
             }
 
             if(initialUnit.value === "c" && subsequentUnit.value === "k") {
                 const kelvinValue = Number(tempValue.value) + 273.15;
-                display.innerText = kelvinValue;
+                display.innerText = kelvinValue + "K";
+                return;
             }
+
+            message.innerText = "No if statement to handle this conversion.";
+            modal.style.display = "flex";
 
         }
 

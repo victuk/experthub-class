@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            max-width: 400px;
+            min-width: 200px;
+        }
+    </style>
+
+    <main>
+        <div>My Weather Website</div>
+        <input id="location-input" placeholder="Input a location..." />
+        <button id="search-button">Search</button>
+        <div id="result"></div>
+    </main>
+
+    <script>
+        const locationInput = document.getElementById("location-input");
+        const searchButton = document.getElementById("search-button");
+        const result = document.getElementById("result");
+
+        searchButton.addEventListener("click", function () {
+
+            result.innerHTML = "Loading...";
+
+            fetch(`https://api.weatherapi.com/v1/current.json?key=3830980eadb24a918ca125149242308&q=${locationInput.value}&aqi=yes`)
+            .then(function (response) {
+                result.innerHTML = "";
+                return response.json();
+            }).then((data) => {
+                console.log("Result:", data);
+
+                result.innerHTML = `
+                
+                <div>
+                    <div>Country: ${data.location.country}</div>
+                    <div>Latitiude: ${data.location.lat}</div>
+                    <div>Longitude: ${data.location.lon}</div>
+                    <div>City: ${data.location.name}</div>
+                    <div>Region: ${data.location.region}</div>
+                    <div>The weather is ${data.current.temp_c} in Celsius and ${data.current.temp_f} in Fahrenheit.</div>
+                </div>
+                
+                `;
+
+            }).catch(function (err) {
+                console.log("There is an error:", err);
+
+                if(err.message) {
+                    result.innerHTML = err.message;
+                    return;
+                }
+
+                result.innerHTML = "An error occurred";
+
+            });
+        });
+
+    </script>
+    
+</body>
+</html>
