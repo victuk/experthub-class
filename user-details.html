@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="user-details"></div>
+    
+    <script>
+
+        const userDetails = document.getElementById("user-details");
+
+        async function fetchUserDetails() {
+            const id = location.search.slice(4);
+
+            const result = await fetch(`https://dummyjson.com/users/${id}`);
+
+            const data = await result.json();
+
+            userDetails.innerHTML = `
+                <div>
+                    <div>Name: ${data.firstName}</div>
+                    <div>LastName: ${data.lastName}</div>
+                </div>
+            `;
+
+            console.log("Data", data);
+
+        }
+
+        fetchUserDetails();
+    </script>
+</body>
+</html>

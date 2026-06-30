@@ -32,6 +32,18 @@
             width: 100px;
             border-radius: 50%;
         }
+
+        .view-button {
+            color: white;
+            background-color: black;
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+            text-decoration: none;
+        }
     </style>
     
     <div>List of users</div>
@@ -49,7 +61,7 @@
         //     const data = await response.json();
 
         //     console.log(data);
-        // };
+        // }; postgresql://victuk:yaArpmb5AAnoy1UhgPLQ5Uy5CAS7PIIj@dpg-d91n5km7r5hc738krkf0-a.oregon-postgres.render.com/realestatemataz
 
 
         async function fetchUsers() {
@@ -77,6 +89,9 @@
                                     <div>Bank Name: ${data.users[i].bank.cardType}</div>
                                     <div>Card Number: ${data.users[i].bank.cardNumber}</div>
                                     <div>Expiry Date: ${data.users[i].bank.cardExpire}</div>
+                                </div>
+                                <div>
+                                    <a href="/user-details.html?id=${data.users[i].id}" class="view-button">View</a>
                                 </div>
                             </div>
                         </div>
