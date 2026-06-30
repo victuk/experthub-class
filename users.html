@@ -52,13 +52,16 @@
         // };
 
 
-        function fetchUsers() {
-            fetch("https://dummyjson.com/users?limit=10", {
+        async function fetchUsers() {
+
+            try {
+                 const result = await fetch("https://dummyjson.com/users?limit=10", {
                 method: "GET"
-            }).then(function (res) {
-                return res.json();
-            }).then(function(data) {
-                console.log("Here is the result", data.users);
+            });
+
+            const data = await result.json();
+
+                console.log("Here is the result", data);
                 console.log("The limit for this result is", data.limit);
 
                 for(let i = 0; i < data.users.length; i++) {
@@ -79,10 +82,12 @@
                         </div>
                     `;
                 }
+            } catch (error) {
+                console.log(error);
+            }
 
-            }).catch(function (error) {
-                console.log("An error occurred", error);
-            });
+           
+            
         };
 
         fetchUsers();
