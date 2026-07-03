@@ -14,9 +14,13 @@
         const userDetails = document.getElementById("user-details");
 
         async function fetchUserDetails() {
-            const id = location.search.slice(4);
+            const id = location.search.slice(1).split("&").map(v => ({
+                [v.split("=")[0]]: v.split("=")[1]
+            }))
 
-            const result = await fetch(`https://dummyjson.com/users/${id}`);
+            console.log("id", id);
+
+            const result = await fetch(`https://dummyjson.com/users/${id[0].id}`);
 
             const data = await result.json();
 
