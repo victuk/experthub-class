@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div>
+        <input type="text" id="username" placeholder="Username" />
+      </div>
+      <div>
+        <input
+          type="text"
+          id="password"
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+      <div>
+        <button id="login-button">Login</button>
+      </div>
+    </div>
+
+    <div id="user-details-from-logging-in"></div>
+
+    <script>
+      const username = document.getElementById("username");
+      const password = document.getElementById("password");
+      const loginButton = document.getElementById("login-button");
+
+      loginButton.addEventListener("click", async function () {
+        console.log(username.value, password.value);
+
+        const result = await fetch("https://dummyjson.com/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username.value,
+            password: password.value,
+          }),
+          credentials: "include",
+        });
+
+        const data = await result.json();
+
+        if(result.status == 200) {
+    
+            sessionStorage.setItem("token", data.accessToken);
+            sessionStorage.setItem("picture", data.image);
+            sessionStorage.setItem("username", data.username);
+
+            location.assign("/profile.html");
+
+        } else {
+            alert(data.message || "Invalid username/password");
+        }
+
+
+
+
+      });
+    </script>
+  </body>
+</html>

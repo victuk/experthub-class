@@ -1,83 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <style>
-        #user-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 20px;
-        }
+      #user-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 20px;
+      }
 
-        .user-card {
-            margin: 20px 0;
-            border: 1px solid black;
-            border-radius: 8px;
-            padding: 20px;
-        }
+      .user-card {
+        margin: 20px 0;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 20px;
+      }
 
-        .bank-card {
-            background-color: rgb(243, 241, 241);
-            padding: 10px;
-            border-radius: 10px;
-        }
+      .bank-card {
+        background-color: rgb(243, 241, 241);
+        padding: 10px;
+        border-radius: 10px;
+      }
 
-        .profile-picture {
-            height: 100px;
-            width: 100px;
-            border-radius: 50%;
-        }
+      .profile-picture {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+      }
 
-        .view-button {
-            color: white;
-            background-color: black;
-            width: 100%;
-            border-radius: 8px;
-            display: block;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-            text-decoration: none;
-        }
+      .view-button {
+        color: white;
+        background-color: black;
+        width: 100%;
+        border-radius: 8px;
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: 20px;
+        text-decoration: none;
+      }
     </style>
-    
+
     <div>List of users</div>
     <div id="user-list"></div>
 
     <script>
+      const userList = document.getElementById("user-list");
 
-        const userList = document.getElementById("user-list");
-        
-        // async function fetchUsers() {
-        //     const response = await fetch("https://dummyjson.com/users", {
-        //         method: "GET"
-        //     });
+      async function fetchUsers() {
+        try {
+          const result = await fetch("https://dummyjson.com/users?limit=10", {
+            method: "GET",
+          });
 
-        //     const data = await response.json();
+          const data = await result.json();
 
-        //     console.log(data);
-        // }; postgresql://victuk:yaArpmb5AAnoy1UhgPLQ5Uy5CAS7PIIj@dpg-d91n5km7r5hc738krkf0-a.oregon-postgres.render.com/realestatemataz
+          console.log("Here is the result", data);
 
 
-        async function fetchUsers() {
+          console.log("The limit for this result is " + data.limit);
+          console.log(`The limit for this result is ${data.limit}`);
 
-            try {
-                 const result = await fetch("https://dummyjson.com/users?limit=10", {
-                method: "GET"
-            });
+          for (let i = 0; i < data.users.length; i++) {
 
-            const data = await result.json();
-
-                console.log("Here is the result", data);
-                console.log("The limit for this result is", data.limit);
-
-                for(let i = 0; i < data.users.length; i++) {
-                    userList.innerHTML += `
+            userList.innerHTML += `
                         <div class="user-card">
                             <img src="${data.users[i].image}" class="profile-picture">
                             <div>Name: ${data.users[i].firstName}</div>
@@ -87,7 +77,7 @@
                                 <div>Card Details</div>
                                 <div class="bank-card">
                                     <div>Bank Name: ${data.users[i].bank.cardType}</div>
-                                    <div>Card Number: ${data.users[i].bank.cardNumber}</div>
+                                            <div>Card Number: ${data.users[i].bank.cardNumber}</div>
                                     <div>Expiry Date: ${data.users[i].bank.cardExpire}</div>
                                 </div>
                                 <div>
@@ -96,17 +86,13 @@
                             </div>
                         </div>
                     `;
-                }
-            } catch (error) {
-                console.log(error);
-            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
 
-           
-            
-        };
-
-        fetchUsers();
-
+      fetchUsers();
     </script>
-</body>
+  </body>
 </html>

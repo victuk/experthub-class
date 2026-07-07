@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="from-session-storage"></div>
+    <div id="from-api"></div>
+
+    <script>
+        const sStorage = document.getElementById("from-session-storage");
+        const fromApi = document.getElementById("from-api");
+
+        async function fetchDetails() {
+
+            sStorage.innerHTML = `
+                <div>
+                    <div>Username: ${sessionStorage.getItem("username")}</div>
+                    <img src="${sessionStorage.getItem("picture")}" style="height: 100px; width: 100px;">    
+                </div>
+            `;
+
+            const result = await fetch("https://dummyjson.com/auth/me", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`
+                },
+                credentials: "include"
+            });
+
+            const data = await result.json();
+
+            console.log("User details", data);
+
+            fromApi.innerHTML = `
+                <div>Full Name: ${data.firstName} ${data["lastName"]}</div>
+            `;
+
+        }
+
+        fetchDetails();
+
+
+    </script>
+</body>
+</html>

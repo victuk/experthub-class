@@ -14,9 +14,11 @@
         const userDetails = document.getElementById("user-details");
 
         async function fetchUserDetails() {
-            const id = location.search.slice(1).split("&").map(v => ({
+            const id = location.search.slice(1).split("&").map(function(v) {
+                return {
                 [v.split("=")[0]]: v.split("=")[1]
-            }))
+            }
+            })
 
             console.log("id", id);
 
